@@ -18,24 +18,41 @@ class BST(bt.BT):
 
     def is_member(self, v):
         '''
-        Returns true if the value `v` is a member of the tree.
+        Returns true if the value `v` is a member of the tree.    
         '''
-        logging.info("TODO@src/bst.py: implement is_member()")
-        return False
+
+        if  self.is_empty():
+            return False
+        elif self.get_value() < v:
+            return self.get_rc().is_member(v)
+        elif self.get_value() > v:
+            return self.get_lc().is_member(v)
+        elif self.get_value()==v:
+            return True
 
     def size(self):
         '''
         Returns the number of nodes in the tree.
         '''
-        logging.info("TODO@src/bst.py: implement size()")
-        return 0
+
+        if self.is_empty():
+            return 0
+        else:
+            return ((self.get_lc().size()) + 1 + (self.get_rc().size()))
+        
+        
 
     def height(self):
         '''
         Returns the height of the tree.
         '''
-        logging.info("TODO@src/bst.py: implement height()")
-        return 0
+        if self.is_empty():
+            return 0
+        elif self.get_lc().height() > self.get_rc().height():
+            return 1 + self.get_lc().height()
+        elif self.get_rc().height() >= self.get_lc().height():
+            return 1 + self.get_rc().height()
+
 
     def preorder(self):
         '''
@@ -49,15 +66,19 @@ class BST(bt.BT):
         '''
         Returns a list of all members in inorder.
         '''
-        log.info("TODO@src/bst.py: implement inorder()")
-        return []
+        if self.is_empty():
+            return []
+        return self.get_lc().inorder() + [self.get_value()] + self.get_rc().inorder()
+
 
     def postorder(self):
         '''
         Returns a list of all members in postorder.
         '''
-        log.info("TODO@src/bst.py: implement postorder()")
-        return []
+        
+        if self.is_empty():
+            return []
+        return self.get_lc().postorder() + self.get_rc().postorder() + [self.get_value()]
 
     def bfs_order_star(self):
         '''
