@@ -185,6 +185,8 @@ class TerminalUI:
         '''
         log.info("TODO@src/ui.py: implement show_2d() using bfs_order_star()")
 
+        
+
 if __name__ == "__main__":
     log.critical("ui contains no main module")
     sys.exit(1)

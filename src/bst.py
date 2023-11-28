@@ -80,6 +80,44 @@ class BST(bt.BT):
             return []
         return self.get_lc().postorder() + self.get_rc().postorder() + [self.get_value()]
 
+
+    def find_max(self):
+        '''
+        Returns highest value of the tree
+        '''
+
+        if (self.is_empty()):
+            return 0
+        
+        result = self.get_value()
+        left_res = self.get_lc().find_max()
+        right_res = self.get_rc().find_max()
+
+        if(left_res > result):
+            result = left_res
+        if(right_res > result):
+            result = right_res
+
+        return result
+    
+    def find_min(self):
+        '''
+        Returns lowest value of tree
+        '''
+        if (self.is_empty()):
+            return float('inf')
+        
+        result = self.get_value()
+        left_res = self.get_lc().find_min()
+        right_res = self.get_rc().find_min()
+
+        if(left_res < result):
+            result = left_res
+        if(right_res < result):
+            result = right_res
+
+        return result
+
     def bfs_order_star(self):
         '''
         Returns a list of all members in breadth-first search* order, which
@@ -93,8 +131,15 @@ class BST(bt.BT):
         The output of t.bfs_order_star() should be:
         [ 10, 5, 15, None, None, None, 20 ]
         '''
-        log.info("TODO@src/bst.py: implement bfs_order_star()")
-        return []
+
+        size = 2**(self.height())
+        my_array = []
+        for i in range(size):
+            my_array[i] = "*"
+
+        for i in range(size):
+            print(my_array[i])
+        return my_array
 
     def add(self, v):
         '''
@@ -115,8 +160,49 @@ class BST(bt.BT):
         Removes the value `v` from the tree and returns the new (updated) tree.
         If `v` is a non-member, the same tree is returned without modification.
         '''
-        log.info("TODO@src/bst.py: implement delete()")
+        if(self.is_empty()):
+            return 0
+        
+        if(self.get_value()==v): 
+            self._delete()
+        elif(self.get_value()>v):
+            self.get_lc().delete(v)
+        elif(self.get_value()<v):
+            self.get_rc().delete(v)
+
+
         return self
+    
+    def _delete(self):
+
+        if(self.get_lc().is_empty() and self.get_rc().is_empty()):
+            self.set_value(None)
+        elif(self.get_lc().is_empty()):
+            self.set_value(self.get_rc().get_value())
+            self.set_lc(self.get_rc().get_lc())
+            self.set_rc(self.get_rc().get_rc())
+        elif(self.get_rc().is_empty()):
+            self.set_value(self.get_lc().get_value())
+            self.set_rc(self.get_lc().get_rc())
+            self.set_lc(self.get_lc().get_lc())
+        else:
+            self._delete_two()
+
+
+    def _delete_two(self):
+        left_height = self.get_lc().height()   
+        right_height = self.get_rc().height() 
+
+        if(left_height>=right_height):
+            max = self.get_lc().find_max()
+            self.set_value(max)
+            self.get_lc().delete(max)
+
+        else:
+            min = self.get_rc().find_min()
+            self.set_value(min)
+            self.get_rc().delete(min)
+
 
 if __name__ == "__main__":
     log.critical("module contains no main module")
