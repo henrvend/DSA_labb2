@@ -135,7 +135,7 @@ class BST(bt.BT):
         size = 2**(self.height())
         my_array = []
         for i in range(size):
-            my_array[i] = "*"
+            my_array.append("*")
 
         for i in range(size):
             print(my_array[i])
