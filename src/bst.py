@@ -171,7 +171,7 @@ class BST(bt.BT):
         If `v` is a non-member, the same tree is returned without modification.
         '''
         if(self.is_empty()):
-            return 0
+            return self
         
         if(self.get_value()==v): 
             self._delete()
