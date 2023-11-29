@@ -184,6 +184,7 @@ class TerminalUI:
         values are are replaced by stars ("*").
         '''
         log.info("TODO@src/ui.py: implement show_2d() using bfs_order_star()")
+        print(self._tree.bfs_order_star())
 
         
 

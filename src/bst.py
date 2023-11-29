@@ -131,7 +131,7 @@ class BST(bt.BT):
         The output of t.bfs_order_star() should be:
         [ 10, 5, 15, None, None, None, 20 ]
         '''
-
+        
         height = self.height()
         my_array = []
 
@@ -142,17 +142,15 @@ class BST(bt.BT):
     
     def add_level(self, level, arr):
         if(self.is_empty()):
-            arr.append("*")
+            stars = 2**(level-1)
+            for i in range(stars):
+                arr.append("*")
         elif(level == 1):
             arr.append(self.get_value())
         elif(level > 1):
             self.get_lc().add_level(level-1, arr)
             self.get_rc().add_level(level-1, arr)
-
-
-
-
-    
+        
     def add(self, v):
         '''
         Adds the value `v` and returns the new (updated) tree.  If `v` is
