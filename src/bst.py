@@ -132,15 +132,27 @@ class BST(bt.BT):
         [ 10, 5, 15, None, None, None, 20 ]
         '''
 
-        size = 2**(self.height())
+        height = self.height()
         my_array = []
-        for i in range(size):
-            my_array.append("*")
 
-        for i in range(size):
-            print(my_array[i])
+        for i in range(1, height+1):
+            self.add_level(i, my_array)
+
         return my_array
+    
+    def add_level(self, level, arr):
+        if(self.is_empty()):
+            arr.append("*")
+        elif(level == 1):
+            arr.append(self.get_value())
+        elif(level > 1):
+            self.get_lc().add_level(level-1, arr)
+            self.get_rc().add_level(level-1, arr)
 
+
+
+
+    
     def add(self, v):
         '''
         Adds the value `v` and returns the new (updated) tree.  If `v` is
