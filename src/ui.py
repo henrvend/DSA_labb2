@@ -191,14 +191,27 @@ class TerminalUI:
         arr = self._tree.bfs_order_star()
         start_value = 0
         count = 1
+        longestInt = 0
+
+        
+        '''for i in arr:
+            current = str(i)
+            if(len(current) > longestInt):
+                longestInt = len(current)
+
+        print(longestInt)'''
+        
 
         for i in range(height):
             
-            offset = 2**(spaces)
-
             for j in range(start_value, start_value + count):
-                print(end="  " * offset)
-                print(arr[j], end="  " * offset)
+                offset = (2**(spaces))+1
+                offset= offset//2
+                
+                print(end=" " * (offset*2))
+                print(arr[j], end="" )
+                
+                print(end=" " *((2*offset)-1))
                 
 
             spaces = spaces -1
@@ -206,6 +219,34 @@ class TerminalUI:
             start_value += count
             count*=2
 
+
+        """
+        
+        def printTree(node):
+            treeArray = bfs(node)
+            h = len(treeArray)
+            whiteSpaces = (2**h)-1
+  
+            def printSpaces(n):
+                for i in range(n):
+                    print(" ",end="")
+
+      
+            for level in treeArray:
+                whiteSpaces = whiteSpaces//2
+                for i,x in enumerate(level):
+                    if i==0:
+                        printSpaces(whiteSpaces)
+                print(x,end="")
+            printSpaces(1+2*whiteSpaces)
+        print()
+        
+        
+        
+        
+        """
+
+ 
 
 
 
