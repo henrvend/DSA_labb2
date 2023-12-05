@@ -84,17 +84,25 @@ class AVL(bst.BST):
         '''
         Performs a double-left rotate around the node rooted at `self`.
         '''
-        
-        self.set_rc(self.get_rc().srr())
+
+        new_head = self.get_rc().srr()
+        self.set_rc(new_head)
         return self.slr()
+
+        '''self.set_rc(self.get_rc().srr())
+        return self.slr()'''
 
     def drr(self):
         '''
         Performs a double-right rotate around the node rooted at `self`.
         '''
-        
-        self.set_lc(self.get_lc().slr())
+
+        new_head = self.get_lc().slr()
+        self.set_lc(new_head)
         return self.srr()
+        
+        '''self.set_lc(self.get_lc().slr())
+        return self.srr()'''
 
 
 if __name__ == "__main__":
