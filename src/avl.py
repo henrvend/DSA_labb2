@@ -16,32 +16,23 @@ class AVL(bst.BST):
         if not self.is_empty():
             self.cons(AVL(), AVL())
 
-    def add(self, v):
-
-
-        if self.is_empty():
-            self.__init__(value=v)
-            return self
-        if self.get_value==v:
-            return self
-        if v < self.get_value():
-            self.cons(self.get_lc().add(v), self.get_rc())
-            self.balance()
-            return self
-        if v > self.get_value():
-            self.cons(self.get_lc(), self.get_rc().add(v))
-            self.balance()
-            return self
-        
-
-    
+    def add(self, v):    
         '''
         Example which shows how to override and call parent methods.  You
         may remove this function and overide something else if you'd like.
         '''
         log.debug("calling bst.BST.add() explicitly from child")
         # TODO: apply balance() correctly for add/delete
-        return super().add(v)
+        
+        super().add(v)
+        self.balance()
+        return self
+    
+    def delete(self, v):
+        super().delete(v)
+        self.balance()
+        return self
+
 
     def balance(self):
         '''
@@ -50,14 +41,14 @@ class AVL(bst.BST):
         '''
 
 
-        if ((self.get_lc().height()-self.get_rc().height())==2):
-            self.balance()
+        if ((super().get_lc().height()-super().get_rc().height())==2):
+            print("Vänstertungt")
         elif((self.get_lc().height()-self.get_rc().height())==-2):
-            self.balance()
+            print("Högertungt")
 
 
-        log.info("TODO@src/avl.py: implement balance()")
-        self.slr().srr().dlr().drr() # TODO: apply these methods correctly
+        """log.info("TODO@src/avl.py: implement balance()")
+        self.slr().srr().dlr().drr() # TODO: apply these methods correctly"""
         return self
 
     def slr(self):
@@ -87,19 +78,6 @@ class AVL(bst.BST):
         '''
         log.info("TODO@src/avl.py: implement drr()")
         return self
-    
-
-    def height(self):
-        '''
-        Returns the height of the tree.
-        '''
-        if self.is_empty():
-            return 0
-        elif self.get_lc().height() > self.get_rc().height():
-            return 1 + self.get_lc().height()
-        elif self.get_rc().height() >= self.get_lc().height():
-            return 1 + self.get_rc().height()
-        
 
 
 if __name__ == "__main__":
