@@ -35,6 +35,10 @@ class AVL(bst.BST):
         AVL-balances around the node rooted at `self`.  In other words, this
         method applies one of the following if necessary: slr, srr, dlr, drr.
         '''
+        if self.is_empty():
+            return self
+        
+        
         if self.balance_factor() >= 2:
             print("VTungt")
             if super().get_lc().get_lc().height() >= super().get_lc().get_rc().height():
