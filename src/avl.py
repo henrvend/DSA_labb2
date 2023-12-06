@@ -18,16 +18,13 @@ class AVL(bst.BST):
 
     def add(self, v):    
         super().add(v)
-        if self.balance_factor()==2 or self.balance_factor()==-2:
-            self = self.balance()
+        self = self.balance()
         return self
     
     def delete(self, v):
         super().delete(v)
-        if self.balance_factor()==2 or self.balance_factor()==-2:
-            self = self.balance()
+        self = self.balance()
         return self
-
 
     def balance_factor(self):
         return super().get_lc().height()-super().get_rc().height()
@@ -38,18 +35,18 @@ class AVL(bst.BST):
         AVL-balances around the node rooted at `self`.  In other words, this
         method applies one of the following if necessary: slr, srr, dlr, drr.
         '''
-        if self.balance_factor() == 2:
+        if self.balance_factor() >= 2:
             print("VTungt")
-            if self.get_lc().get_rc().is_empty():
+            if super().get_lc().get_lc().height() >= super().get_lc().get_rc().height():
                 print("VVtungt: srr")
                 return self.srr()
             else:
                 print("VHtung: drr")
                 return self.drr()
 
-        elif self.balance_factor() == -2:
+        elif self.balance_factor() <= -2:
             print("Htungt")  
-            if self.get_rc().get_lc().is_empty():
+            if super().get_rc().get_rc().height() >= super().get_rc().get_lc().height():
                 print("HHtungt: slr") 
                 return self.slr() 
             else:
