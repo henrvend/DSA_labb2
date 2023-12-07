@@ -204,8 +204,7 @@ class TerminalUI:
         for i in range(height):
             
             for j in range(start_value, start_value + count):
-                offset = ((2**(spaces)))
-                offset= (offset*longestInt)
+                offset = ((2**(spaces))*longestInt)
                 
                 print(end=" " * (offset))
                 print('{message: ^{width}}'.format(message=str(arr[j]), width=longestInt), end="" )
