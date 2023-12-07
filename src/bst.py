@@ -179,8 +179,6 @@ class BST(bt.BT):
             self.get_lc().delete(v)
         elif(self.get_value()<v):
             self.get_rc().delete(v)
-
-
         return self
     
     def _delete(self):
@@ -198,20 +196,22 @@ class BST(bt.BT):
         else:
             self._delete_two()
 
+        return self
+
 
     def _delete_two(self):
+
         left_height = self.get_lc().height()   
         right_height = self.get_rc().height() 
-
         if(left_height>=right_height):
             max = self.get_lc().find_max()
             self.set_value(max)
-            self.get_lc().delete(max)
-
+            self.set_lc(self.get_lc().delete(max))
         else:
             min = self.get_rc().find_min()
             self.set_value(min)
-            self.get_rc().delete(min)
+            self.set_rc(self.get_rc().delete(min))
+        return self
 
 
 if __name__ == "__main__":

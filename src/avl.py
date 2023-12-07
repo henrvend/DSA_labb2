@@ -18,16 +18,14 @@ class AVL(bst.BST):
 
     def add(self, v):    
         super().add(v)
-        self = self.balance()
-        return self
+        return self.balance()
     
     def delete(self, v):
         super().delete(v)
-        self = self.balance()
-        return self
+        return self.balance()
 
     def balance_factor(self):
-        return super().get_lc().height()-super().get_rc().height()
+        return self.get_lc().height()-self.get_rc().height()
         
 
     def balance(self):
@@ -41,7 +39,7 @@ class AVL(bst.BST):
         
         if self.balance_factor() >= 2:
             print("VTungt")
-            if super().get_lc().get_lc().height() >= super().get_lc().get_rc().height():
+            if self.get_lc().get_lc().height() >= self.get_lc().get_rc().height():
                 print("VVtungt: srr")
                 return self.srr()
             else:
@@ -50,22 +48,21 @@ class AVL(bst.BST):
 
         elif self.balance_factor() <= -2:
             print("Htungt")  
-            if super().get_rc().get_rc().height() >= super().get_rc().get_lc().height():
+            if self.get_rc().get_rc().height() >= self.get_rc().get_lc().height():
                 print("HHtungt: slr") 
-                return self.slr() 
+                self = self.slr()
+                return self
             else:
                 print("HVtung: dlr")
                 return self.dlr()
 
-
-        """log.info("TODO@src/avl.py: implement balance()")
-        self.slr().srr().dlr().drr() # TODO: apply these methods correctly"""
         return self
 
     def slr(self):
         '''
         Performs a single-left rotate around the node rooted at `self`.
         ''' 
+        
         y = self.get_rc()
         self.set_rc(y.get_lc())
         y.set_lc(self)
@@ -90,8 +87,6 @@ class AVL(bst.BST):
         self.set_rc(new_head)
         return self.slr()
 
-        '''self.set_rc(self.get_rc().srr())
-        return self.slr()'''
 
     def drr(self):
         '''
@@ -101,9 +96,6 @@ class AVL(bst.BST):
         new_head = self.get_lc().slr()
         self.set_lc(new_head)
         return self.srr()
-        
-        '''self.set_lc(self.get_lc().slr())
-        return self.srr()'''
 
 
 if __name__ == "__main__":

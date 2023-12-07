@@ -4,6 +4,7 @@ import sys
 import bst
 import avl
 import logging
+import math
 
 log = logging.getLogger(__name__)
 
@@ -184,8 +185,6 @@ class TerminalUI:
         values are are replaced by stars ("*").
         '''
 
-
-
         height = self._tree.height()    
         spaces = height
         arr = self._tree.bfs_order_star()
@@ -194,24 +193,25 @@ class TerminalUI:
         longestInt = 0
 
         
-        '''for i in arr:
+        for i in arr:
             current = str(i)
             if(len(current) > longestInt):
                 longestInt = len(current)
 
-        print(longestInt)'''
+        print(longestInt)
         
 
         for i in range(height):
             
             for j in range(start_value, start_value + count):
-                offset = (2**(spaces))+1
+                offset = (2**(spaces))
                 offset= offset//2
                 
-                print(end=" " * (offset*2))
+                print(end=" " * (offset*2*longestInt))
                 print(arr[j], end="" )
-                
-                print(end=" " *((2*offset)-1))
+                #if len(str(arr[j]))<longestInt:
+                #    print(end=" " *(longestInt - (len(str(arr[j])))))
+                print(end="*" *((2*offset*longestInt)-1))
                 
 
             spaces = spaces -1
@@ -219,37 +219,7 @@ class TerminalUI:
             start_value += count
             count*=2
 
-
-        """
-        
-        def printTree(node):
-            treeArray = bfs(node)
-            h = len(treeArray)
-            whiteSpaces = (2**h)-1
-  
-            def printSpaces(n):
-                for i in range(n):
-                    print(" ",end="")
-
-      
-            for level in treeArray:
-                whiteSpaces = whiteSpaces//2
-                for i,x in enumerate(level):
-                    if i==0:
-                        printSpaces(whiteSpaces)
-                print(x,end="")
-            printSpaces(1+2*whiteSpaces)
-        print()
-        
-        
-        
-        
-        """
-
- 
-
-
-
+    
         
 
 if __name__ == "__main__":
