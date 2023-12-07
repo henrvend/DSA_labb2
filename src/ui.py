@@ -204,14 +204,12 @@ class TerminalUI:
         for i in range(height):
             
             for j in range(start_value, start_value + count):
-                offset = (2**(spaces))
-                offset= offset//2
+                offset = ((2**(spaces)))
+                offset= (offset*longestInt)
                 
-                print(end=" " * (offset*2*longestInt))
-                print(arr[j], end="" )
-                #if len(str(arr[j]))<longestInt:
-                #    print(end=" " *(longestInt - (len(str(arr[j])))))
-                print(end="*" *((2*offset*longestInt)-1))
+                print(end=" " * (offset))
+                print('{message: ^{width}}'.format(message=str(arr[j]), width=longestInt), end="" )
+                print(end=" " *(offset-longestInt))
                 
 
             spaces = spaces -1
