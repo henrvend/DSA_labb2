@@ -25,6 +25,9 @@ class AVL(bst.BST):
         return self.balance()
 
     def balance_factor(self):
+        '''
+        Returns value of which side the tree is heavy on
+        '''
         return self.get_lc().height()-self.get_rc().height()
         
 
@@ -38,22 +41,23 @@ class AVL(bst.BST):
         
         
         if self.balance_factor() >= 2:
-            #print("VTungt")
+            '''
+            Check if tree is left-left or left-right heavy to perform a srr or drr
+            '''
             if self.get_lc().get_lc().height() >= self.get_lc().get_rc().height():
-                #print("VVtungt: srr")
                 return self.srr()
             else:
-                #print("VHtung: drr")
                 return self.drr()
 
+        
         elif self.balance_factor() <= -2:
-            #print("Htungt")  
+            '''
+            Check if tree is right-right or right-left heavy to performe a slr or dlr
+            '''           
             if self.get_rc().get_rc().height() >= self.get_rc().get_lc().height():
-                #print("HHtungt: slr") 
                 self = self.slr()
                 return self
             else:
-                #print("HVtung: dlr")
                 return self.dlr()
 
         return self

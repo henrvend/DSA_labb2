@@ -186,30 +186,40 @@ class TerminalUI:
         '''
 
         height = self._tree.height()    
-        spaces = height
+        level = height
         arr = self._tree.bfs_order_star()
         start_value = 0
         count = 1
         longestInt = 0
 
-        
+        '''
+        Find which value has most numbers in it 
+        '''
         for i in arr:
             current = str(i)
             if(len(current) > longestInt):
                 longestInt = len(current)
         
-
+        '''
+        For each level in tree, print spaces and numbers 
+        '''
         for i in range(height):
             
+            '''
+            Print the current level of the tree
+            '''
             for j in range(start_value, start_value + count):
-                offset = ((2**(spaces))*longestInt)
+                offset = ((2**(level))*longestInt)
                 
                 print(end=" " * (offset))
-                print('{message: ^{width}}'.format(message=str(arr[j]), width=longestInt), end="" )
+                '''
+                Set size of the number to take the same amount of space as the longest int in array and center it
+                '''
+                print('{message: ^{width}}'.format(message=str(arr[j]), width=longestInt), end="" ) 
                 print(end=" " *(offset-longestInt))
                 
 
-            spaces = spaces -1
+            level = level -1
             print("\n")
             start_value += count
             count*=2

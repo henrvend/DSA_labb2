@@ -141,6 +141,9 @@ class BST(bt.BT):
         return my_array
     
     def add_level(self, level, arr):
+        '''
+        Add each level in the tree
+        '''
         if(self.is_empty()):
             stars = 2**(level-1)
             for i in range(stars):
@@ -182,7 +185,9 @@ class BST(bt.BT):
         return self
     
     def _delete(self):
-
+        '''
+        When value is found, remove node and move childs, if there are any, accordingly
+        '''
         if(self.get_lc().is_empty() and self.get_rc().is_empty()):
             self.set_value(None)
         elif(self.get_lc().is_empty()):
@@ -200,7 +205,11 @@ class BST(bt.BT):
 
 
     def _delete_two(self):
-
+        
+        '''
+        If the node that is to be removed has two childs, check size of each and move
+        accordingly and set the new nodes value and childs
+        '''
         left_height = self.get_lc().height()   
         right_height = self.get_rc().height() 
         if(left_height>=right_height):
