@@ -197,8 +197,6 @@ class TerminalUI:
             current = str(i)
             if(len(current) > longestInt):
                 longestInt = len(current)
-
-        print(longestInt)
         
 
         for i in range(height):

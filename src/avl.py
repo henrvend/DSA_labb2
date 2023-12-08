@@ -38,22 +38,22 @@ class AVL(bst.BST):
         
         
         if self.balance_factor() >= 2:
-            print("VTungt")
+            #print("VTungt")
             if self.get_lc().get_lc().height() >= self.get_lc().get_rc().height():
-                print("VVtungt: srr")
+                #print("VVtungt: srr")
                 return self.srr()
             else:
-                print("VHtung: drr")
+                #print("VHtung: drr")
                 return self.drr()
 
         elif self.balance_factor() <= -2:
-            print("Htungt")  
+            #print("Htungt")  
             if self.get_rc().get_rc().height() >= self.get_rc().get_lc().height():
-                print("HHtungt: slr") 
+                #print("HHtungt: slr") 
                 self = self.slr()
                 return self
             else:
-                print("HVtung: dlr")
+                #print("HVtung: dlr")
                 return self.dlr()
 
         return self
