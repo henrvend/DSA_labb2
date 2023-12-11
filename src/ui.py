@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+#Henrik Vendel
+#Adam Brattström
 
 import sys
 import bst
