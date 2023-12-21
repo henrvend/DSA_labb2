@@ -6,7 +6,6 @@ import sys
 import bst
 import avl
 import logging
-import math
 
 log = logging.getLogger(__name__)
 
@@ -198,6 +197,8 @@ class TerminalUI:
         Find which value has most numbers in it 
         '''
         for i in arr:
+            if(i==None):
+                i=1
             current = str(i)
             if(len(current) > longestInt):
                 longestInt = len(current)
@@ -217,7 +218,10 @@ class TerminalUI:
                 '''
                 Set size of the number to take the same amount of space as the longest int in array and center it
                 '''
-                print('{message: ^{width}}'.format(message=str(arr[j]), width=longestInt), end="" ) 
+                if arr[j]==None:
+                    print('{message: ^{width}}'.format(message="*", width=longestInt), end="" ) 
+                else:    
+                    print('{message: ^{width}}'.format(message=str(arr[j]), width=longestInt), end="" ) 
                 print(end=" " *(offset-longestInt))
                 
 
@@ -227,8 +231,6 @@ class TerminalUI:
             count*=2
 
     
-        
-
 if __name__ == "__main__":
     log.critical("ui contains no main module")
     sys.exit(1)

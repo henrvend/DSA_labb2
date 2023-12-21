@@ -150,7 +150,7 @@ class BST(bt.BT):
         if(self.is_empty()):
             stars = 2**(level-1)
             for i in range(stars):
-                arr.append("*")
+                arr.append(None)
         elif(level == 1):
             arr.append(self.get_value())
         elif(level > 1):
